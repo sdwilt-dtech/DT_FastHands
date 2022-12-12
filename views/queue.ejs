@@ -1,0 +1,119 @@
+<%- include('head') %>
+<link rel="stylesheet" href="/css/jquery-ui.css">
+<body id="queue">
+	<a href="/users" style="float: left;" class="btn">Users</a>
+	<div class="container">
+		<div class="row">
+			<center class="col-12">
+				<table id="users-table" class="table table-dark table-striped" style="max-width: 75%">
+					<thead class="green">
+						<tr>
+							<th></th>
+							<th scope="col">First Name</th>
+							<th scope="col">Email</th>
+						</tr>
+					</thead>
+					<tbody id="queue0" data-queue="0" class="connectedSortable">
+						<% queue.map((user, i) => { %>
+							<tr>
+								<td><%= i+1 %></td>
+								<td nowrap><%= user.name %></td>
+								<td nowrap><%= user.email %></td>
+							</tr>
+						<% }) %>
+					</tbody>
+				</table>
+			</center>
+		</div>
+
+		<div class="row queues">
+			<div class="col-6">
+				<table class="table table-dark table-striped">
+					<thead class="green">
+						<tr>
+							<th scope="col" colspan="3">
+								<center>
+									Queue 1
+								</center>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="queue1" data-queue="1" class="connectedSortable">
+						<% queue1.map((user, i) => { %>
+							<tr>
+								<td><%= i+1 %></td>
+								<td nowrap><%= user.name %></td>
+								<td nowrap><%= user.email %></td>
+							</tr>
+						<% }) %>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-6">
+				<table class="table table-dark table-striped">
+					<thead class="green">
+						<tr>
+							<th scope="col" colspan="3">
+								<center>
+									Queue 2
+								</center>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="queue2" data-queue="2" class="connectedSortable">
+						<% queue2.map((user, i) => { %>
+							<tr>
+								<td><%= i+1 %></td>
+								<td nowrap><%= user.name %></td>
+								<td nowrap><%= user.email %></td>
+							</tr>
+						<% }) %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js/jquery-1.12.4.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script>
+		var socket = io.connect(window.location.origin)
+
+		$(function () {
+			var renderQueue = function (queue, users) {
+				var $queue = $("#queue"+queue);
+				$queue.empty()
+				$queue.append('<tr class="sort-disabled"><td colspan="3"></td></tr>')
+				users.map((user, i) => {
+					$queue.append(`
+<tr class="sortable" data-user=${user.id}>
+	<td>${i+1}</td>
+	<td nowrap>${user.name}</td>
+	<td nowrap>${user.email}</td>
+</tr>`)
+				})
+			}
+			socket.emit('queues', {});
+			socket.on('queue', (data) => renderQueue(0, data.queue))
+			socket.on('queue1', (data) => renderQueue(1, data.queue1))
+			socket.on('queue2', (data) => renderQueue(2, data.queue2))
+
+
+			$("tbody" ).sortable({
+				connectWith: ".connectedSortable",
+				items: ">tr.sortable",
+				update: (e, ui) => {
+					var $user = $(ui.item)
+					var uid = $user.data('user')
+					var $queue = $(ui.item).parent('.connectedSortable')
+					var qid = $queue.data('queue')
+
+					var position = $queue.find('tr').index($user) - 1;
+
+					socket.emit('queue-change', {uid, qid, position})
+				},
+			}).disableSelection()
+		});
+	</script>
+<%- include('foot') %>

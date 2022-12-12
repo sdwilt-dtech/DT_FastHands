@@ -1,0 +1,9 @@
+{
+  "name" : "hilmor-fasthands",
+  "script" : "index.js",
+  "watch" : true,
+  "env" : {
+    "PORT" : 3000,
+    "IP" : "127.0.0.1"
+  }
+}

@@ -1,0 +1,47 @@
+<%- include('head') %>
+<body id="leaderboard">
+	<div class="container">
+		<div class="row">
+			<div class="logo">
+				<%- include('svg') %>
+			</div>
+			<img alt="Fastest Hands in HVAC/R" src="/images/tagline.png">
+		</div>
+
+		<div class="row">
+			<table id="table_id" class="table table-dark table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Rank</th>
+						<th scope="col">First Name</th>
+						<th scope="col">Last Name</th>
+						<th scope="col" class="end">Best Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% users.map((user, i) => { %>
+						<tr>
+							<th scope="row"><%= i+1 %></th>
+							<td><%= user.firstName %></td>
+							<td><%= user.lastName %></td>
+							<td class="end"><%= user.bestFormatted() %></td align="right">
+						</tr>
+					<% }) %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		// refresh every 30 seconds
+		setTimeout(() => window.location.reload(), 30000);
+	</script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js/jquery-1.12.4.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script>
+		var socket = io.connect(window.location.origin)
+		// refresh on new score
+		socket.on('new-score', (data) => window.location.reload())
+	</script>
+<%- include('foot') %>

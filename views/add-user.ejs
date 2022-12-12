@@ -1,0 +1,56 @@
+<%- include('head') %>
+<body id="add-user">
+	<a href="/queue" style="float: left;" class="btn">Queue</a>
+	<div class="container">
+		<% if (typeof user != "undefined") { %>
+			<div class="alert alert-success" role="alert">
+				Thanks <%= user.firstName %>, your registration was successful
+			</div>
+		<% } %>
+		<div class="row justify-content-md-center">
+			<div class="col col-xl-6 col-lg-8 col-md-12">
+				<form class="form-horizontal" action="/add-user" method="POST">
+					<section id="register">
+						<div id="legend">
+							<legend class="">Register</legend>
+						</div>
+
+						<div class="form-group">
+							<!-- First Name -->
+							<label class="control-label" for="first_name">First Name</label>
+							<input type="text" id="first_name" name="first_name" placeholder="" class="form-control input-xlarge">
+						</div>
+
+						<div class="form-group">
+							<!-- Last Name -->
+							<label class="control-label" for="last_name">Last Name</label>
+							<input type="text" id="last_name" name="last_name" placeholder="" class="form-control input-xlarge">
+						</div>
+
+						<div class="form-group">
+							<!-- E-mail -->
+							<label class="control-label" for="email">E-mail</label>
+							<input type="text" id="email" name="email" placeholder="" class="form-control input-xlarge">
+						</div>
+
+						<div class="form-group">
+							<!-- Phone -->
+							<label class="control-label" for="phone">Phone Number</label>
+							<input type="text" id="phone" name="phone" placeholder="" class="form-control input-xlarge">
+						</div>
+
+						<div class="form-group submit-button">
+							<!-- Button -->
+							<button class="btn btn-block btn-success">Submit</button>
+						</div>
+					</section>
+				</form>
+			</div>
+	</div>
+	<script type="text/javascript">
+		$(function () {
+			if ($(".alert").length)
+				setTimeout(() => $('.alert').remove(), 2500);
+		})
+	</script>
+<%- include('foot') %>

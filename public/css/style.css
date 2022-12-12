@@ -1,0 +1,100 @@
+html {
+	height: 100%;
+	background: #000 !important;
+}
+
+#add-user .row,
+#add-user .container,
+#add-user form {
+	height: 100%;
+}
+
+#add-user,
+#queue,
+#users,
+#leaderboard {
+	background: #000;
+	height: 100%;
+	color: #42AD2C;
+	font-size: 1.5em;
+}
+
+#leaderboard table {
+	font-size: 0.6em;
+}
+
+#leaderboard td.end,
+#leaderboard th.end {
+	text-align: end;
+}
+
+#add-user section#register {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+#add-user section#register > div{
+	flex: 1;
+}
+
+#add-user legend{
+	font-size: 4em;
+	text-align: center;
+}
+
+#add-user .form-control{
+	font-size: 1.25em;
+}
+
+#add-user button {
+	font-size: 1.5em;
+}
+
+#users thead tr,
+#leaderboard thead tr {
+	background-color: #42AD2C;
+}
+
+#users .logo,
+#leaderboard .logo {
+	width: 140px;
+	margin: 10px 0;
+}
+
+#users img,
+#leaderboard img {
+	vertical-align: middle;
+    border-style: none;
+    height: 21px;
+    margin: 22px 0;
+}
+
+#users #search-field {
+	font-size: 1.2em;
+    margin: 20px 0;
+}
+
+#users #users-table_filter {
+	display: none;
+}
+
+#queue .queues table {
+	margin: 10px;
+}
+
+#queue tbody {
+	min-height: 25px;
+}
+
+#users #users-table_wrapper {
+	width: 100%;
+}
+
+#users a {
+	color: #FFF;
+}
+
+.green {
+	color: #42AD2C;
+}
