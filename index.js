@@ -4,12 +4,23 @@ const app = require('express')()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const fastcsv = require("fast-csv");
-const port = 8080
+var pool = require("./db").pool;
+
+// const IP = process.env.IP || localhost;
+// const PORT = process.env.PORT || 3000;
+
 
 const path = require('path')
 
 const User = require('./user').User
 const Users = require('./user').Users
+
+app.get('/views', function(req, res) {
+	res.send("Hello world2!")
+});
+app.listen(3000, function() {
+	console.log("Server is listening on port 3000, I think...");
+});
 
 let queue = []
 let queue1 = []
@@ -168,7 +179,7 @@ app.get('/leaders', (req, res) => {
 	})
 })
 
-server.listen(process.env.PORT, process.env.IP, () => console.log(`Listening at ${process.env.IP}:${process.env.PORT}!`))
+// server.listen(process.env.PORT, process.env.IP, () => console.log(`Listening at ${process.env.IP}:${process.env.PORT}!`))
 
 io.on('connection', function (socket) {
   socket.on('queues', data => sendQueues())
