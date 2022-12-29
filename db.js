@@ -1,13 +1,36 @@
-var mysql = require('mysql')
-var pool  = mysql.createPool({
-	// number of wired ports, this ensures we have a connection queued up for each device
-	connectionLimit : 10,
-	// These need to get moved into an ENV of some sort
+var mysql = require('mysql');
+var pool  = mysql.createConnection({
+	connectionLimit : 10, // number of wired ports, this ensures we have a connection queued up for each device
+	connectTimeout: 30000, //30 secs
 	host            : '127.0.0.1',
 	user            : 'root',
 	password        : 'BAller231',
-	database        : 'fasthands'
-})
+	database        : 'fasthands',
+	// port			: '5432',
+	debug			:  true,
+});
+
+module.exports = pool;
+
+	var getConnection = function (cb) {
+		pool.getConnection(function(err, connection) {
+			// if (err) throw err;
+			if(err) {
+				return cb(err);
+			}
+			cb(null, connection);
+		});
+	};
+module.exports = getConnection;
+
+// pool.query("SELECT * FROM fasthands",(err, data) => {
+// 	if(err) {
+// 		console.error(err);
+// 		return;
+// 	}
+// 	// rows fetch
+// 	console.log(data);
+// });
 
 const query = (sql, count = 0) => new Promise((resolve, reject) => {
 	pool.query(sql, function (error, results, fields) {
@@ -18,7 +41,7 @@ const query = (sql, count = 0) => new Promise((resolve, reject) => {
 		else
 			resolve(results)
 	})
-})
+});
 
 module.exports.all = () => query(`SELECT * FROM users`)
 module.exports.find = (id) => query(`SELECT * FROM users WHERE id = ${id}`, 1)
