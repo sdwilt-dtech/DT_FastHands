@@ -91,7 +91,9 @@ html {
 	width: 100%;
 }
 
-#users a {
+#users #add-user,
+#queue,
+#leaderboard a {
 	color: #FFF;
 }
 

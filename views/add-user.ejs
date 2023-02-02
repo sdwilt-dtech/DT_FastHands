@@ -1,6 +1,6 @@
 <%- include('head') %>
 <body id="add-user">
-	<a href="/queue" style="float: left;" class="btn">Queue</a>
+	<a href="/queue" style="float: left;" class="btn">Queue</a> | <a href="/add-user" class="btn">Add User</a> | <a href="/users" class="btn">View Users</a>
 	<div class="container">
 		<% if (typeof user != "undefined") { %>
 			<div class="alert alert-success" role="alert">
@@ -12,6 +12,9 @@
 				<form class="form-horizontal" action="/add-user" method="POST">
 					<section id="register">
 						<div id="legend">
+						<div class="logo">
+                                        <%- include('svg') %>
+                                    </div>
 							<legend class="">Fastest Hands<br />Register</legend>
 						</div>
 
