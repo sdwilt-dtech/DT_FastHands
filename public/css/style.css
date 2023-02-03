@@ -41,6 +41,7 @@ html {
 #add-user legend{
 	font-size: 2em;
 	text-align: center;
+	color: #42AD2C;
 }
 
 #add-user .form-control{
@@ -63,11 +64,13 @@ html {
 }
 
 #users img,
-#leaderboard img {
+#leaderboard img,
+#queue img {
 	vertical-align: middle;
+	padding-left: 450px;
     border-style: none;
-    height: 21px;
-    margin: 22px 0;
+    height: 250px;
+    margin: 22px auto;
 }
 
 #users #search-field {
@@ -91,12 +94,42 @@ html {
 	width: 100%;
 }
 
-#users #add-user,
+#users, #add-user,
 #queue,
 #leaderboard a {
 	color: #FFF;
+
 }
 
 .green {
 	color: #42AD2C;
+}
+
+/*Adding extra style navigation*/
+
+.container {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.navbar {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	font-size: 12px;
+	letter-spacing: 5px;
+	min-height: 50px;
+	background-color: #42ad2c;
+	color: white;
+}
+
+.navbar .container {
+	min-height: 40px;
+}
+.navbar-nav  li a:hover {
+	color: #ffffff !important;
+}
+.active>a {
+	color: #ffffff !important;;
 }
