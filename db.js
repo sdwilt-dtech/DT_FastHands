@@ -2,12 +2,12 @@ var mysql = require('mysql');
 var pool  = mysql.createConnection({
 	connectionLimit : 10, // number of wired ports, this ensures we have a connection queued up for each device
 	connectTimeout: 30000, //30 secs
-	host            : '127.0.0.1',
+	host            : 'http://mysql-lmnj:3306',
 	user            : 'root',
 	password        : 'BAller231',
 	database        : 'fasthands',
-	// port			: '5432',
-	debug			:  true,
+	// port		: '5432',
+	debug		:  true,
 });
 
 module.exports = pool;
