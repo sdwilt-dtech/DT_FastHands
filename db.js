@@ -1,5 +1,5 @@
-var mysql = require('pg');
-var pool  = pg.createConnection({
+var mysql = require('mysql');
+var pool  = mysql.createConnection({
 	connectionLimit : 10, // number of wired ports, this ensures we have a connection queued up for each device
 	connectTimeout: 30000, //30 secs
 	host            : 'dpg-cffr8to2i3mg6p9plihg-a',
