@@ -71,7 +71,7 @@ const Model = function UserModel (data) {
 		return DB.delete(this.id).then(done => true).catch(done => false)
 	}
 
-	this.bestFormatted = () => (this.best / 1000).toFixed(3)
+	this.bestFormatted = () => (this.best).toFixed(3)
 
 	return this
 }
